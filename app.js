@@ -2,7 +2,7 @@ import {MapboxOverlay as DeckOverlay} from '@deck.gl/mapbox';
 import {GeoJsonLayer, ArcLayer} from '@deck.gl/layers';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
-import { getFillColor } from './utils.js';
+import { getFillColor, getFillColorLandCover } from './utils.js';
 
 const modalElement = document.getElementById('modal');
 const modalContentElement = document.getElementById('modal__content');
@@ -17,8 +17,26 @@ const map = new maplibregl.Map({
 });
 
 const deckOverlay = new DeckOverlay({
-  // interleaved: true,
   layers: [
+    new GeoJsonLayer({
+        id: 'base_land_cover',
+        data: 'http://localhost:3000/base_land_cover',
+        filled: true,
+        getFillColor: getFillColorLandCover,
+        getLineWidth: 0,
+        pickable: true,
+        autoHighlight: true,
+        onHover: ({object}) => {
+            if (!object) return 
+            modalContentElement.innerHTML = `
+                <h3>Land cover by ESA</h3>
+                <ul>
+                    <li><b>ID</b>: ${object.properties.id}</li>
+                    <li><b>Type</b>: ${object.properties.subtype}</li>
+                </ul>                
+            `
+        },
+    }),
     new GeoJsonLayer({
         id: 'places',
         data: 'http://localhost:3000/places',
