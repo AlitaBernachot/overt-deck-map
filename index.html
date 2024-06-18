@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='UTF-8' />
+    <title>Overture maps x deck.gl</title>
+    <style>
+      body, ul, li, h1, h2, h3 {
+        margin: 0;
+        padding: 0;
+      }
+      ul {
+        list-style-type: none;
+        margin-top: 10px;
+      }
+      body {
+        color: rgb(70, 70, 70);
+        font-family: Arial, sans-serif;
+      }
+      #map {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      #modal {
+        padding: 20px 30px;
+        background-color: whitesmoke;
+        border-radius: 2px;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 9999999;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="modal">
+      <div id="modal__content"></div>
+    </div>
+    <div id="map"></div>
+    <script type="module" src='app.js'></script>
+  </body>
+</html>
