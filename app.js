@@ -10,8 +10,8 @@ const modalContentElement = document.getElementById('modal__content');
 const map = new maplibregl.Map({
   container: 'map',
   style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
-  center: [54.58, 24.40],
-  zoom: 11.5,
+  center: [54.494419,24.443868],
+  zoom: 11.2,
   bearing: 0,
   pitch: 30
 });
@@ -70,6 +70,27 @@ const deckOverlay = new DeckOverlay({
             `
         },
     }),
+    new GeoJsonLayer({
+        id: 'bbox',       
+        data: {
+            "type": "Polygon",
+            "coordinates": [
+              [                
+                [54.296494, 24.554306], // Haut gauche
+                [54.692001, 24.554306], // Haut droite
+                [54.692001, 24.333959], // Bas droite
+                [54.296494, 24.333959], // Bas gauche
+                [54.296494, 24.554306]  // Retour au point de départ
+              ]
+            ]
+          }
+        ,
+        filled: false,
+        getLineWidth: 20,
+        getLineColor: [0, 0, 0, 200],
+    }),
+
+    // [54.296494, 24.554306], [54.692001, 24.554306], [54.692001, 24.333959], [54.296494, 24.333959],[54.296494, 24.554306]
     // new GeoJsonLayer({
     //   id: 'airports',
     //   data: AIR_PORTS,
